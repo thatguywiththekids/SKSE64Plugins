@@ -4,6 +4,7 @@
 #include "skse64/GameData.h"
 #include "skse64/GameObjects.h"
 #include "skse64/GameMenus.h"
+#include "skse64/GameSettings.h"
 #include "skse64/GameRTTI.h"
 #include "skse64/GameStreams.h"
 
@@ -550,21 +551,53 @@ void FaceMorphInterface::LoadMods()
 			}
 		}
 
-		// Create default slider maps
+
+		//
+		// If g_allowAllMorphs is enabled, prefetch face morph preset info for use further down.
+		//
+
+		SInt32 totalPresets[FacePresetList::kNumPresets] = { 0 };
+		bool hasPresetCount[FacePresetList::kNumPresets] = { false };
+
+		if (g_allowAllMorphs) {
+			static const char * s_presetNames[FacePresetList::kNumPresets] = {
+				"sRSMNoseTypes",
+				"sRSMBrowTypes",
+				"sRSMEyeTypes",
+				"sRSMMouthTypes"
+			};
+
+			for (UInt32 t = 0; t < FacePresetList::kNumPresets; t++) {
+				Setting * gameSetting = nullptr;
+				if (g_gameSettingCollection && *g_gameSettingCollection) {
+					gameSetting = (*g_gameSettingCollection)->Get(s_presetNames[t]);
+				}
+				if (gameSetting) {
+					totalPresets[t] = gameSetting->data.s32;
+					hasPresetCount[t] = true;
+				}
+				else {
+					// No setting? Not sure what happened, but at least log it
+					_WARNING("LoadMods warning: Could not resolve GameSetting '%s'", s_presetNames[t]);
+				}
+			}
+		}
+
+		// Initialize default slider maps and apply any preset limit updates across all loaded races.
 		TESRace * race = NULL;
 		for (UInt32 i = 0; i < dataHandler->races.count; i++)
 		{
 			if (dataHandler->races.GetNthItem(i, race)) {
-
 				if (g_allowAllMorphs) {
-					for (UInt32 i = 0; i <= 1; i++) {
-						if (race->chargenData[i]) {
+					for (UInt32 sex = 0; sex <= 1; sex++) {
+						if (race->chargenData[sex]) {
 							for (UInt32 t = 0; t < FacePresetList::kNumPresets; t++) {
-								race->chargenData[i]->presetFlags[t][0] = 0xFFFFFFFF;
-								race->chargenData[i]->presetFlags[t][1] = 0xFFFFFFFF;
-								auto presetList = FacePresetList::GetSingleton();
-								auto gameSetting = presetList->presets[t].gameSetting;
-								race->chargenData[i]->totalPresets[t] = gameSetting->data.s32;
+								if (hasPresetCount[t]) {
+									// Unlock all preset slots
+									race->chargenData[sex]->presetFlags[t][0] = 0xFFFFFFFF;
+									race->chargenData[sex]->presetFlags[t][1] = 0xFFFFFFFF;
+									race->chargenData[sex]->totalPresets[t] = totalPresets[t];
+								}
 							}
 						}
 					}
