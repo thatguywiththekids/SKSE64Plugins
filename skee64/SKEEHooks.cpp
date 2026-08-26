@@ -132,33 +132,33 @@ namespace Addresses {
 	static const uintptr_t SetNewInventoryItemModel = 0x009281A0;			// 51772
 #elif STORE_VERSION == RUNTIME_TYPE_GOG
 	// Hooks
-	static const uintptr_t InvokeCategoriesList_Target = 0x00954D00;		// 52407
-	static const uintptr_t DoubleMorphCallback2_Target = 0x00951940;		// 52356
-	static const uintptr_t PreprocessedHeads = 0x003BC840;					// 24731
-	static const uintptr_t ApplyRaceMorph_Target = 0x0042B6A0;				// 26836
-	static const uintptr_t UpdateMorphs_Target = 0x0042B590;				// 26835
-	static const uintptr_t UpdateMorph_Target = 0x00435DF0;					// 27061
-	static const uintptr_t NiAllocate_Geom = 0x00D37470;					// 70939
-	static const uintptr_t NiAllocate_Geom2_Target = 0x00D379B0;			// 70947
-	static const uintptr_t NiFree_Geom2_Target = 0x00D38470;				// 70958
-	static const uintptr_t UpdateHeadState_Target1 = 0x003BC980;			// 24732
-	static const uintptr_t UpdateHeadState_Target2 = 0x003BB7B0;			// 24725
-	static const uintptr_t RaceSexMenu_Vtable = 0x018FCD78;					// 215885 ??_7RaceSexMenu@@6B@
-	static const uintptr_t CachePartsTarget_Target = 0x00952840;			// 52369
-	static const uintptr_t SetNewInventoryItemModel_Target = 0x00927C90;	// 51776
+	static const uintptr_t InvokeCategoriesList_Target = 0x00957860;		// 52407
+	static const uintptr_t DoubleMorphCallback2_Target = 0x009544A0;		// 52356
+	static const uintptr_t PreprocessedHeads = 0x003BCBF0;					// 24731
+	static const uintptr_t ApplyRaceMorph_Target = 0x0042BA50;				// 26836
+	static const uintptr_t UpdateMorphs_Target = 0x0042B940;				// 26835
+	static const uintptr_t UpdateMorph_Target = 0x004361A0;					// 27061
+	static const uintptr_t NiAllocate_Geom = 0x00D39FD0;					// 70939
+	static const uintptr_t NiAllocate_Geom2_Target = 0x00D3A510;			// 70947
+	static const uintptr_t NiFree_Geom2_Target = 0x00D3AFD0;				// 70958
+	static const uintptr_t UpdateHeadState_Target1 = 0x003BCD30;			// 24732
+	static const uintptr_t UpdateHeadState_Target2 = 0x003BBB60;			// 24725
+	static const uintptr_t RaceSexMenu_Vtable = 0x01901338;					// 215885 ??_7RaceSexMenu@@6B@
+	static const uintptr_t CachePartsTarget_Target = 0x009553A0;			// 52369
+	static const uintptr_t SetNewInventoryItemModel_Target = 0x0092A7F0;	// 51776
 	// Functions
-	static const uintptr_t AttachBipedObject = 0x002172E0;					// 15711
-	static const uintptr_t useFaceGenPreProcessedHeads = 0x020092D8;		// 378620
-	static const uintptr_t TESModelTri_vtbl = 0x017D8538;					// 195221 ??_7TESModelTri@@6B@
-	static const uintptr_t AddGFXArgument = 0x008EF0C0;						// 51029
-	static const uintptr_t FaceGenApplyMorph = 0x0042B3A0;					// 26831
-	static const uintptr_t AddRaceMenuSlider = 0x0095AF10;					// 52453
-	static const uintptr_t DoubleMorphCallback = 0x00954300;				// 52401
-	static const uintptr_t UpdateNPCMorphs = 0x003B8EC0;					// 24713
-	static const uintptr_t UpdateNPCMorph = 0x003B90B0;						// 24714
-	static const uintptr_t UpdateHeadState = 0x003BB610;					// 24724
-	static const uintptr_t SetInventoryItemModel = 0x00927BE0;				// 51775
-	static const uintptr_t SetNewInventoryItemModel = 0x00927680;			// 51772
+	static const uintptr_t AttachBipedObject = 0x00217380;					// 15711
+	static const uintptr_t useFaceGenPreProcessedHeads = 0x0200E378;		// 378620
+	static const uintptr_t TESModelTri_vtbl = 0x017DC868;					// 195221 ??_7TESModelTri@@6B@
+	static const uintptr_t AddGFXArgument = 0x008F1C20;						// 51029
+	static const uintptr_t FaceGenApplyMorph = 0x0042B750;					// 26831
+	static const uintptr_t AddRaceMenuSlider = 0x0095DA70;					// 52453
+	static const uintptr_t DoubleMorphCallback = 0x00956E60;				// 52401
+	static const uintptr_t UpdateNPCMorphs = 0x003B9270;					// 24713
+	static const uintptr_t UpdateNPCMorph = 0x003B9460;						// 24714
+	static const uintptr_t UpdateHeadState = 0x003BB9C0;					// 24724
+	static const uintptr_t SetInventoryItemModel = 0x0092A740;				// 51775
+	static const uintptr_t SetNewInventoryItemModel = 0x0092A1E0;			// 51772
 #endif
 };
 
