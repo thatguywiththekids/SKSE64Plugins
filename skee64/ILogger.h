@@ -42,6 +42,21 @@ public:
 
 	void SetLogLevel(LogLevel logLevel);
 
+	// Helper function to safely adapt arguments before passing them to fmt::sprintf.
+	template <typename TArg>
+	static decltype(auto) AdaptArg(TArg&& arg)
+	{
+		using DecayedType = std::decay_t<TArg>;
+
+		if constexpr (std::is_same_v<DecayedType, const char*> || std::is_same_v<DecayedType, char*>) {
+			return std::forward<TArg>(arg);
+		} else if constexpr (std::is_pointer_v<DecayedType> || std::is_member_pointer_v<DecayedType> || std::is_null_pointer_v<DecayedType>) {
+			return (const void*)arg;
+		} else {
+			return std::forward<TArg>(arg);
+		}
+	}
+
 	template<typename ...T>
 	void Log(LogLevel level, const char* fmt, const T&... args)
 	{
@@ -50,7 +65,7 @@ public:
 			for (int32_t i = 0; i < m_indentLevel; ++i)
 				str += "\t";
 		}
-		str += fmt::sprintf(fmt, args...);
+		str += fmt::sprintf(fmt, AdaptArg(args)...);
 		if (m_logger) {
 			m_logger->log(gSpdLogLevelMap[level], str);
 		}
